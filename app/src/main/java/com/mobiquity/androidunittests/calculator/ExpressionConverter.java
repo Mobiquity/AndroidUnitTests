@@ -9,6 +9,7 @@ import com.mobiquity.androidunittests.calculator.input.LeftParenInput;
 import com.mobiquity.androidunittests.calculator.input.NumericInput;
 import com.mobiquity.androidunittests.calculator.input.RightParenInput;
 import com.mobiquity.androidunittests.calculator.input.operator.AdditionOperator;
+import com.mobiquity.androidunittests.calculator.input.operator.DivisionOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.MultiplicationOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.Operator;
 import com.mobiquity.androidunittests.calculator.input.operator.SubtractionOperator;
@@ -36,6 +37,7 @@ public class ExpressionConverter {
             put(context.getString(R.string.add_op), new AdditionOperator());
             put(context.getString(R.string.substract_op), new SubtractionOperator());
             put(context.getString(R.string.multiply_op), new MultiplicationOperator());
+            put(context.getString(R.string.divide_op), new DivisionOperator());
             put(context.getString(R.string.left_paren), new LeftParenInput());
             put(context.getString(R.string.right_paren), new RightParenInput());
             put(context.getString(R.string.decimal_symbol), new DecimalInput());
