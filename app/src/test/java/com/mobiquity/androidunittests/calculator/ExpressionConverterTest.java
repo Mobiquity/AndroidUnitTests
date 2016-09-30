@@ -5,6 +5,7 @@ import com.mobiquity.androidunittests.calculator.input.LeftParenInput;
 import com.mobiquity.androidunittests.calculator.input.NumericInput;
 import com.mobiquity.androidunittests.calculator.input.RightParenInput;
 import com.mobiquity.androidunittests.calculator.input.operator.AdditionOperator;
+import com.mobiquity.androidunittests.calculator.input.operator.ExponentOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.MultiplicationOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.SubtractionOperator;
 
@@ -91,6 +92,19 @@ public class ExpressionConverterTest {
         List<Input> expectedConvertedInput = Arrays.asList(
                 new NumericInput(3),
                 new MultiplicationOperator(),
+                new NumericInput(4)
+        );
+        List<Input> convertedInput = expressionConverter.convert(normalizedInput);
+
+        assertAbout(inputList()).that(convertedInput).containsExactlyInputValuesIn(expectedConvertedInput);
+    }
+
+    @Test
+    public void testConvert_ExponentOperation() {
+        List<String> normalizedInput = Arrays.asList("3", "^", "4");
+        List<Input> expectedConvertedInput = Arrays.asList(
+                new NumericInput(3),
+                new ExponentOperator(),
                 new NumericInput(4)
         );
         List<Input> convertedInput = expressionConverter.convert(normalizedInput);

@@ -53,7 +53,8 @@ public class CalculatorActivity extends BaseActivity<CalculatorComponent>
             R.id.divide_op,
             R.id.left_paren,
             R.id.right_paren,
-            R.id.decimal
+            R.id.decimal,
+            R.id.exponent_op
     }) List<Button> calculatorButtons;
 
     @BindViews(value = {
@@ -67,12 +68,12 @@ public class CalculatorActivity extends BaseActivity<CalculatorComponent>
         ButterKnife.bind(this);
 
         numericPad.addOnNumberClickedListener(number -> presenter.handleCalculatorButtonPress(Integer.toString(number)));
-        ButterKnife.apply(calculatorButtons, (button, index) -> {
+        ButterKnife.apply(calculatorButtons, (ButterKnife.Action<? super TextView>) (button, index) -> {
             String operator = button.getText().toString();
             button.setOnClickListener(v -> presenter.handleCalculatorButtonPress(operator));
         });
 
-        ButterKnife.apply(notImplementedButtons, (button, index) -> {
+        ButterKnife.apply(notImplementedButtons, (ButterKnife.Action<? super View>) (button, index) -> {
             button.setOnClickListener(v -> Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_SHORT).show());
         });
     }

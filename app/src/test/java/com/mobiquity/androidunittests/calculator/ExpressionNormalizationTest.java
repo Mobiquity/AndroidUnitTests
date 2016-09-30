@@ -108,6 +108,14 @@ public class ExpressionNormalizationTest {
     }
 
     @Test
+    public void testNormalize_DontAllowLeftParenExponent() {
+        List<String> originalInput = Arrays.asList("(", "^");
+        List<String> expectedNormalizedInput = Arrays.asList("(");
+        List<String> normalizedInput = expressionConverter.normalize(originalInput);
+        assertThat(normalizedInput).containsExactlyElementsIn(expectedNormalizedInput);
+    }
+
+    @Test
     public void testNormalize_DontAllowMultipleDecimalPointsPerNumber() {
         List<String> originalInput = Arrays.asList("3", ".", ".");
         List<String> expectedNormalizedInput = Arrays.asList("3",".");

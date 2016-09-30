@@ -13,6 +13,8 @@ import java.util.List;
 
 import timber.log.Timber;
 
+import static android.R.attr.x;
+
 public class CalculatorPresenter extends Presenter<CalculatorView> {
 
     private Calculator calculator;

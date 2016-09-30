@@ -5,6 +5,7 @@ import com.mobiquity.androidunittests.calculator.input.LeftParenInput;
 import com.mobiquity.androidunittests.calculator.input.NumericInput;
 import com.mobiquity.androidunittests.calculator.input.RightParenInput;
 import com.mobiquity.androidunittests.calculator.input.operator.AdditionOperator;
+import com.mobiquity.androidunittests.calculator.input.operator.ExponentOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.MultiplicationOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.SubtractionOperator;
 
@@ -27,6 +28,7 @@ public class InfixInputParserTest {
     private AdditionOperator plus = new AdditionOperator();
     private SubtractionOperator minus= new SubtractionOperator();
     private MultiplicationOperator times = new MultiplicationOperator();
+    private ExponentOperator exp = new ExponentOperator();
 
     private LeftParenInput leftParen = new LeftParenInput();
     private RightParenInput rightParen = new RightParenInput();
@@ -144,7 +146,22 @@ public class InfixInputParserTest {
                 .inOrder();
     }
 
+    /**
+     * Before: 3 ^ 4
+     * After: 3 4 ^
+     */
+    @Test
+    public void testToPostfix_SimpleExponent() {
+        Input[] inputs = new Input[] {
+                three,
+                exp,
+                four
+        };
 
+        Queue<Input> postfixOutput = infixInputParser.toPostfix(inputs);
+        assertThat(postfixOutput).containsExactly(three, four, exp)
+                .inOrder();
+    }
 
     /**
      * Before: 3 * 4 + 5
@@ -243,6 +260,26 @@ public class InfixInputParserTest {
 
         Queue<Input> postfixOutput = infixInputParser.toPostfix(inputs);
         assertThat(postfixOutput).containsExactly(three, four, five, plus, times).inOrder();
+    }
+
+    /**
+     * Before: 3 * (4 ^ 5)
+     * After: 3 4 5 ^ *
+     */
+    @Test
+    public void testToPostfix_Multiplication_ParenExponent() {
+        Input[] inputs = new Input[] {
+                three,
+                times,
+                leftParen,
+                four,
+                exp,
+                five,
+                rightParen
+        };
+
+        Queue<Input> postfixOutput = infixInputParser.toPostfix(inputs);
+        assertThat(postfixOutput).containsExactly(three, four, five, exp, times).inOrder();
     }
 
     /**

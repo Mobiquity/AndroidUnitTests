@@ -5,6 +5,7 @@ import com.mobiquity.androidunittests.calculator.input.LeftParenInput;
 import com.mobiquity.androidunittests.calculator.input.NumericInput;
 import com.mobiquity.androidunittests.calculator.input.RightParenInput;
 import com.mobiquity.androidunittests.calculator.input.operator.AdditionOperator;
+import com.mobiquity.androidunittests.calculator.input.operator.ExponentOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.MultiplicationOperator;
 import com.mobiquity.androidunittests.calculator.input.operator.SubtractionOperator;
 
@@ -98,6 +99,29 @@ public class CalculatorTest {
                 new NumericInput(3),
                 new MultiplicationOperator(),
                 new AdditionOperator()
+        };
+        mockPostFix(input, postfixInput);
+
+        double result = calculator.evaluate(input);
+        assertThat(result).isWithin(expectedResult);
+    }
+
+    @Test
+    public void testEvaluate_Exponent() throws Exception {
+        // Test: 2 ^ 3 = 8
+
+        Input input[] = new Input[]{
+                new NumericInput(2),
+                new ExponentOperator(),
+                new NumericInput(3)
+        };
+        double expectedResult = 8;
+
+        // Assume the infix input parser works and provide the correct postfix for the input
+        Input[] postfixInput = new Input[] {
+                new NumericInput(2),
+                new NumericInput(3),
+                new ExponentOperator()
         };
         mockPostFix(input, postfixInput);
 

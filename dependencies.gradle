@@ -8,7 +8,7 @@ ext.versions = [
         code: buildVersionCode(),
 
         // Libraries
-        androidSupport: '24.1.1',
+        androidSupport: '24.2.1',
         timber: '4.1.2',
         dagger: '2.6',
         javaxAnnotations: '1.0',

@@ -47,7 +47,7 @@ public class PresenterTest {
     }
 
     @Test
-    public void testIsViewAttached_IsFalseAfterUnind() {
+    public void testIsViewAttached_IsFalseAfterUnbind() {
         assertThat(presenter.isViewAttached()).isFalse();
         presenter.bind(view);
         presenter.unbind();

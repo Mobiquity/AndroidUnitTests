@@ -57,7 +57,7 @@ public class NumericPad extends RelativeLayout {
     private void initView() {
         inflate(getContext(), R.layout.numeric_pad, this);
         ButterKnife.bind(this, this);
-        ButterKnife.apply(numericButtons, (button, index) -> {
+        ButterKnife.apply(numericButtons, (ButterKnife.Action<? super Button>) (button, index) -> {
             button.setText(String.valueOf(index));
             button.setOnClickListener(v -> handleNumericButtonClick(index));
         });

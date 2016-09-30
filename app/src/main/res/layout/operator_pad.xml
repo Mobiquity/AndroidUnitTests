@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/padOperatorBackgroundColor"
-    app:rowCount="5"
+    app:rowCount="6"
     app:columnCount="1"
     app:orientation="vertical">
 
@@ -16,6 +16,15 @@
         app:layout_rowWeight="1"
         style="@style/PadButtonStyle"
         android:src="@drawable/ic_backspace"/>
+
+    <Button
+        android:id="@+id/exponent_op"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"
+        style="@style/PadButtonStyle"
+        android:text="@string/exponent_op"/>
 
     <Button
         android:id="@+id/divide_op"
