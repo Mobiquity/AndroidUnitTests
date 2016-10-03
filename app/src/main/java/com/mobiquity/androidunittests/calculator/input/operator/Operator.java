@@ -18,8 +18,6 @@ public abstract class Operator extends Input {
     public abstract int getPrecedence();
     public abstract boolean isLeftAssociative();
 
-
-
     public enum Precedence {
         ADDITION_PRECEDENCE(2),
         SUBTRACTION_PRECEDENCE(2),
@@ -41,17 +39,35 @@ public abstract class Operator extends Input {
     @Override
     public NormalizeRule getNormalizeExpressionRule(Map<String, Input> expressionInputMap, List<String> expression) {
         //Don't allow leading operator
-        if(expression.isEmpty()) {
+        if (expression.isEmpty()) {
             return NormalizeRule.REMOVE;
         }
 
         //Don't allow multiple operators
-        String lastItem = expression.get(expression.size()-1);
-        if(expressionInputMap.containsKey(lastItem)) {
+        String lastItem = expression.get(expression.size() - 1);
+
+        if (expressionInputMap.containsKey(lastItem)) {
             Input lastInput = expressionInputMap.get(lastItem);
-            if(lastInput instanceof Operator) {
-                return NormalizeRule.REPLACE;
-            } else if(lastInput instanceof LeftParenInput) {
+
+            if (lastInput instanceof Operator) {
+                for (int i = expression.size() - 1; i >= 0; i--) {
+                    lastItem = expression.get(i);
+
+                    if (expressionInputMap.containsKey(lastItem)) {
+                        lastInput = expressionInputMap.get(lastItem);
+
+                        if (!(lastInput instanceof Operator)) {
+                            break;
+                        }
+
+                        if (!(this instanceof SubtractionOperator) || i != expression.size() - 1) {
+                            expression.remove(i);
+                        }
+                    }
+                }
+            }
+
+            if (lastInput instanceof LeftParenInput && !(this instanceof SubtractionOperator)) {
                 return NormalizeRule.REMOVE;
             }
         }

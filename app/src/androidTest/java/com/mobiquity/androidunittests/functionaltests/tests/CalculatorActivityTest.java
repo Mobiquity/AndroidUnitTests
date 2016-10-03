@@ -79,6 +79,31 @@ public class CalculatorActivityTest {
 
         onView(withId(R.id.subtract_op)).perform(click());
         onView(withId(R.id.display_input)).check(matches(withText("1-")));
+
+        onView(withId(R.id.subtract_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("1-")));
+
+        onView(withId(R.id.multiply_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("1*")));
+
+        onView(withId(R.id.subtract_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("1*-")));
+
+        onView(withId(R.id.exponent_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("1^")));
+    }
+
+    @Test
+    public void shouldPreventOperatorAfterLeftParen() {
+        onView(withId(R.id.left_paren)).perform(click());
+        onView(withId(R.id.add_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("(")));
+
+        onView(withId(R.id.subtract_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("(-")));
+
+        onView(withId(R.id.multiply_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("(")));
     }
 
     @Test
@@ -111,7 +136,6 @@ public class CalculatorActivityTest {
         intended(hasComponent(WolframActivity.class.getName()));
         Intents.release();
     }
-
 
     @After
     public void tearDown() {
