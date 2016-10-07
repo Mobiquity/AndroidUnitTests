@@ -140,6 +140,12 @@ public class CalculatorActivityUnitTest {
         Mockito.verify(calculatorActivity.presenter).handleDelete();
     }
 
+    @Test
+    public void testOnLongClickDeleteButton_StartsHandlingClear() {
+        ButterKnife.findById(calculatorActivity, R.id.delete_op).performLongClick();
+        Mockito.verify(calculatorActivity.presenter).handleClear();
+    }
+
     private void checkCalculatorButtonRegistered(@IdRes int buttonId) {
         Button button = ButterKnife.findById(calculatorActivity, buttonId);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);

@@ -25,9 +25,12 @@ import static com.mobiquity.androidunittests.testutil.MockitoInvocationHelper.on
 
 public class CalculatorPresenterTest {
 
-    @Mock Calculator calculator;
-    @Mock ExpressionConverter expressionConverter;
-    @Mock CalculatorView mockView;
+    @Mock
+    Calculator calculator;
+    @Mock
+    ExpressionConverter expressionConverter;
+    @Mock
+    CalculatorView mockView;
 
     private CalculatorPresenter presenter;
 
@@ -78,6 +81,19 @@ public class CalculatorPresenterTest {
     }
 
     @Test
+    public void testHandleClear_UpdatesDisplay() {
+        configureExpressionConverterNormalization();
+
+        presenter.bind(mockView);
+        presenter.handleCalculatorButtonPress("3");
+        presenter.handleCalculatorButtonPress("4");
+        Mockito.verify(mockView, onlyLastInvocation()).updateDisplayText(Mockito.eq("34"));
+
+        presenter.handleClear();
+        Mockito.verify(mockView, onlyLastInvocation()).updateDisplayText(Mockito.eq(""));
+    }
+
+    @Test
     public void testHandleEvaluate_GivesCorrectInputToCalculator() throws Exception {
         // Mock that the user has entered 3 + 4 already in the calculator
         Mockito.when(expressionConverter.convert(Mockito.anyList())).thenReturn(
@@ -101,7 +117,7 @@ public class CalculatorPresenterTest {
     }
 
     @Test
-    public void testHandleEvaluatePassive_ShowPassiveCalculation() throws Exception{
+    public void testHandleEvaluatePassive_ShowPassiveCalculation() throws Exception {
         // Have the calculator throw exception until a successful calculation
         Mockito.when(calculator.evaluate(Mockito.any())).thenThrow(
                 new Calculator.CalculatorEvaluationException("Invalid Expression"));
@@ -126,7 +142,7 @@ public class CalculatorPresenterTest {
     }
 
     @Test
-    public void testHandleEvaluateExplicit_ShowsResult() throws Exception{
+    public void testHandleEvaluateExplicit_ShowsResult() throws Exception {
         presenter.bind(mockView);
         Mockito.when(calculator.evaluate(Mockito.any())).thenReturn(100.0);
         presenter.handleEvaluate();

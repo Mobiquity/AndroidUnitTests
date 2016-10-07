@@ -2,8 +2,8 @@ package com.mobiquity.androidunittests.ui.presenter;
 
 import com.mobiquity.androidunittests.calculator.Calculator;
 import com.mobiquity.androidunittests.calculator.CalculatorConstants;
-import com.mobiquity.androidunittests.calculator.input.Input;
 import com.mobiquity.androidunittests.calculator.ExpressionConverter;
+import com.mobiquity.androidunittests.calculator.input.Input;
 import com.mobiquity.androidunittests.ui.mvpview.CalculatorView;
 
 import java.text.DecimalFormat;
@@ -12,8 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import timber.log.Timber;
-
-import static android.R.attr.x;
 
 public class CalculatorPresenter extends Presenter<CalculatorView> {
 
@@ -42,11 +40,18 @@ public class CalculatorPresenter extends Presenter<CalculatorView> {
     }
 
     public void handleDelete() {
-        if(!expression.isEmpty()) {
-            expression.remove(expression.size()-1);
+        if (!expression.isEmpty()) {
+            expression.remove(expression.size() - 1);
             view().updateDisplayText(getDisplayString());
             evaluate(false);
         }
+    }
+
+    public boolean handleClear() {
+        expression.clear();
+        view().showResult("");
+        evaluate(false);
+        return true;
     }
 
     public void handleEvaluate() {
@@ -63,13 +68,13 @@ public class CalculatorPresenter extends Presenter<CalculatorView> {
                 expression.remove("");
                 view().showResult(decimalFormat.format(result));
             } else {
-                if(inputs.size() > 1) {
+                if (inputs.size() > 1) {
                     view().showPassiveCalculation(decimalFormat.format(result));
                 }
             }
         } catch (Calculator.CalculatorEvaluationException e) {
             Timber.e(e, "%s: %s", e.getMessage(), expression);
-            if(isResult) {
+            if (isResult) {
                 view().showResultError();
             }
         }
@@ -77,7 +82,7 @@ public class CalculatorPresenter extends Presenter<CalculatorView> {
 
     private String getDisplayString() {
         String displayString = "";
-        for(String item : expression) {
+        for (String item : expression) {
             displayString += item;
         }
         return displayString;

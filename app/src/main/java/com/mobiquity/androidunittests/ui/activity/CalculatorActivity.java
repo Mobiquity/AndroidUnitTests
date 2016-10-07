@@ -33,18 +33,24 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 public class CalculatorActivity extends BaseActivity<CalculatorComponent>
         implements CalculatorView {
 
     private Animator resultAnimator;
 
-    @Inject CalculatorPresenter presenter;
+    @Inject
+    CalculatorPresenter presenter;
 
-    @BindView(R.id.numeric_pad) NumericPad numericPad;
-    @BindView(R.id.display_input) CalculatorEditText displayInput;
-    @BindView(R.id.display_result) TextView resultText;
-    @BindView(R.id.sliding_panel) SlidingUpPanelLayout slidingPanel;
+    @BindView(R.id.numeric_pad)
+    NumericPad numericPad;
+    @BindView(R.id.display_input)
+    CalculatorEditText displayInput;
+    @BindView(R.id.display_result)
+    TextView resultText;
+    @BindView(R.id.sliding_panel)
+    SlidingUpPanelLayout slidingPanel;
 
     @BindViews(value = {
             R.id.add_op,
@@ -81,8 +87,8 @@ public class CalculatorActivity extends BaseActivity<CalculatorComponent>
     @Override
     protected CalculatorComponent buildComponent() {
         return DaggerCalculatorComponent.builder()
-                    .appComponent(CalculatorApplication.getAppComponent(this))
-                    .build();
+                .appComponent(CalculatorApplication.getAppComponent(this))
+                .build();
     }
 
     @Override
@@ -105,7 +111,7 @@ public class CalculatorActivity extends BaseActivity<CalculatorComponent>
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
-        if(resultAnimator != null) {
+        if (resultAnimator != null) {
             resultAnimator.end();
         }
     }
@@ -113,6 +119,11 @@ public class CalculatorActivity extends BaseActivity<CalculatorComponent>
     @OnClick(R.id.delete_op)
     void onClickDeleteButton() {
         presenter.handleDelete();
+    }
+
+    @OnLongClick(R.id.delete_op)
+    boolean onLongClickDeleteButton() {
+        return presenter.handleClear();
     }
 
     @OnClick(R.id.eq)
@@ -124,11 +135,12 @@ public class CalculatorActivity extends BaseActivity<CalculatorComponent>
     void onClickWolframButton() {
         slidingPanel.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
-            public void onPanelSlide(View panel, float slideOffset) {}
+            public void onPanelSlide(View panel, float slideOffset) {
+            }
 
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
-                if(newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
                     slidingPanel.removePanelSlideListener(this);
                     Intent intent = new Intent(CalculatorActivity.this, WolframActivity.class);
                     startActivity(intent);
