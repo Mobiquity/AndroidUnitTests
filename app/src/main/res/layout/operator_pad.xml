@@ -1,65 +1,57 @@
-<android.support.v7.widget.GridLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/padOperatorBackgroundColor"
-    app:rowCount="6"
-    app:columnCount="1"
-    app:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="6">
 
     <ImageButton
         android:id="@+id/delete_op"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/PadButtonStyle"
         android:src="@drawable/ic_backspace"/>
 
     <Button
         android:id="@+id/exponent_op"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/PadButtonStyle"
         android:text="@string/exponent_op"/>
 
     <Button
         android:id="@+id/divide_op"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/PadButtonStyle"
         android:text="@string/divide_op"/>
 
     <Button
         android:id="@+id/multiply_op"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/PadButtonStyle"
         android:text="@string/multiply_op"/>
 
     <Button
         android:id="@+id/subtract_op"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/PadButtonStyle"
         android:text="@string/substract_op"/>
 
     <Button
         android:id="@+id/add_op"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/PadButtonStyle"
         android:text="@string/add_op"/>
 
-</android.support.v7.widget.GridLayout>
+</LinearLayout>
