@@ -71,6 +71,10 @@ public class CalculatorPresenter extends Presenter<CalculatorView> {
                 if (inputs.size() > 1) {
                     view().showPassiveCalculation(decimalFormat.format(result));
                 }
+                else
+                {
+                    view().showPassiveCalculation("0");
+                }
             }
         } catch (Calculator.CalculatorEvaluationException e) {
             Timber.e(e, "%s: %s", e.getMessage(), expression);

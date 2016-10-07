@@ -129,6 +129,17 @@ public class CalculatorActivityTest {
     }
 
     @Test
+    public void testClickDeleteButton_shouldSetToZeroResultDisplay() {
+        onView(withId(R.id.digit_3)).perform(click());
+        onView(withId(R.id.digit_5)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("3*5")));
+
+        onView(withId(R.id.delete_op)).perform(click());
+        onView(withId(R.id.delete_op)).perform(click());
+        onView(withId(R.id.display_input)).check(matches(withText("0")));
+    }
+
+    @Test
     public void testClickWolframButton_ShouldStartWolframMode() {
         Intents.init();
         onView(withId(R.id.handle)).perform(click());
