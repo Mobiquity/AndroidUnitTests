@@ -74,12 +74,12 @@ public class CalculatorActivity extends BaseActivity<CalculatorComponent>
         ButterKnife.bind(this);
 
         numericPad.addOnNumberClickedListener(number -> presenter.handleCalculatorButtonPress(Integer.toString(number)));
-        ButterKnife.apply(calculatorButtons, (ButterKnife.Action<? super TextView>) (button, index) -> {
+        ButterKnife.apply(calculatorButtons, (button, index) -> {
             String operator = button.getText().toString();
             button.setOnClickListener(v -> presenter.handleCalculatorButtonPress(operator));
         });
 
-        ButterKnife.apply(notImplementedButtons, (ButterKnife.Action<? super View>) (button, index) -> {
+        ButterKnife.apply(notImplementedButtons, (button, index) -> {
             button.setOnClickListener(v -> Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_SHORT).show());
         });
     }

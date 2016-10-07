@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SubtractionOperator extends Operator {
-
     public SubtractionOperator() {
         super(R.string.substract_op);
     }
@@ -36,15 +35,16 @@ public class SubtractionOperator extends Operator {
     @Override
     public NormalizeRule getNormalizeExpressionRule(Map<String, Input> expressionInputMap, List<String> expression) {
         //Don't allow -- or +-
-        if(!expression.isEmpty()) {
+        if (!expression.isEmpty()) {
             String lastItem = expression.get(expression.size() - 1);
             if (expressionInputMap.containsKey(lastItem)) {
                 Input lastInput = expressionInputMap.get(lastItem);
-                if(lastInput instanceof AdditionOperator || lastInput instanceof SubtractionOperator) {
+                if (lastInput instanceof AdditionOperator || lastInput instanceof SubtractionOperator) {
                     return NormalizeRule.REPLACE;
                 }
             }
         }
-        return NormalizeRule.ADD;
+
+        return super.getNormalizeExpressionRule(expressionInputMap, expression);
     }
 }
