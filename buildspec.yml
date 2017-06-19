@@ -12,6 +12,7 @@ phases:
       - echo  set execute on gradlew
       - ls -l /usr/local/android-sdk-linux
       - ls -l /usr/local/android-sdk-linux/tools
+      - android list sdk
       - /usr/local/android-sdk-linux/tools/bin/android update sdk --no-ui --filter build-tools-24.0.3
   build:
     commands:
