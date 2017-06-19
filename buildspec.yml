@@ -3,7 +3,6 @@ version: 0.2
 env:
   variables:
     ENV1: "Wassup"
-
 phases:
   install:
     commands:
@@ -11,8 +10,7 @@ phases:
   pre_build:
     commands:
       - echo  set execute on gradlew
-      - chmod 755 gradlew
-      - sdkmanager build-tools;24.0.3
+      - /usr/local/android-sdk-linux/tools/bin/sdkmanager "build-tools;24.0.3"
   build:
     commands:
       - echo Build started on `date`
