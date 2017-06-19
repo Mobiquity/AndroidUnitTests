@@ -1,0 +1,24 @@
+version: 0.2
+
+env:
+  variables:
+    ENV1: "Wassup"
+
+phases:
+  install:
+    commands:
+      - echo $ENV1
+  pre_build:
+    commands:
+      - echo  Nothing to do in the pre-build phase
+  build:
+    commands:
+      - echo Build started on `date`
+      - ./gradlew clean assembleDebug
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - app/build/outputs/apk/*debug.apk
+  discard-paths: yes
