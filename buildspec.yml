@@ -10,6 +10,8 @@ phases:
   pre_build:
     commands:
       - echo "y" | android update sdk --all --no-ui --filter "build-tools-24.0.3"
+      - echo "y" | android update sdk --all --no-ui --filter "extras-android-m2repository"
+      - echo "y" | android update sdk --all --no-ui --filter "extras-google-google_play_services"
   build:
     commands:
       - echo Build started on `date`
