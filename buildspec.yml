@@ -10,11 +10,12 @@ phases:
       - echo $ENV1
   pre_build:
     commands:
-      - echo  Nothing to do in the pre-build phase
+      - echo  set execute on gradlew
+      - chmod 755 gradlew
   build:
     commands:
       - echo Build started on `date`
-      - $CODEBUILD_SOURCE_REPO_URL/gradlew clean assembleDebug
+      - gradlew clean assembleDebug
   post_build:
     commands:
       - echo Build completed on `date`
