@@ -12,6 +12,7 @@ phases:
     commands:
       - echo  set execute on gradlew
       - chmod 755 gradlew
+      - sdkmanager build-tools;24.0.3
   build:
     commands:
       - echo Build started on `date`
