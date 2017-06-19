@@ -9,7 +9,7 @@ phases:
       - echo $ENV1
   pre_build:
     commands:
-      - android update sdk --all --no-ui --filter "build-tools-24.0.3"
+      - echo "y" | android update sdk --all --no-ui --filter "build-tools-24.0.3"
   build:
     commands:
       - echo Build started on `date`
