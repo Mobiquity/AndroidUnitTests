@@ -9,10 +9,7 @@ phases:
       - echo $ENV1
   pre_build:
     commands:
-      - echo  set execute on gradlew
-      - ls -l /usr/local/android-sdk-linux/tools/bin
-      - android list sdk
-      - android update sdk --no-ui --filter build-tools-24.0.3
+      - android update sdk --no-ui --filter "build-tools-24.0.3"
   build:
     commands:
       - echo Build started on `date`
