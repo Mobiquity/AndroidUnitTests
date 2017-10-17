@@ -13,6 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                cleanWs()
                 sh './gradlew testDebugUnitTest'
 
             }
