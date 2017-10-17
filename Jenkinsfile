@@ -10,11 +10,16 @@ pipeline {
                 sh './gradlew assembleDebug'
             }
         }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+                sh './gradlew testDebugUnitTest'
+
+            }
+        }
         stage('Static Code Analysis') {
             steps {
                 echo 'Scanning with SonarQube...'
-                // requires SonarQube Scanner 2.8+
-                //def scannerHome = tool 'Mob SonarQube Runner';
 
                 withSonarQubeEnv('Mob Sonar') {
                     sh "/opt/sonar-runner/bin/sonar-scanner"
@@ -24,13 +29,6 @@ pipeline {
         stage('Checkmarx Scan') {
             steps {
                 echo 'Scanning with Checkmarx...'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh './gradlew testDebugUnitTest'
-
             }
         }
         stage('Deploy') {
