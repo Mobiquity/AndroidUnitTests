@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                cleanWs()
+                cleanWs deleteDirs: true, patterns: [[pattern: 'app/build/*', type: 'INCLUDE']]
                 sh './gradlew testDebugUnitTest'
 
             }
